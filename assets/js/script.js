@@ -76,8 +76,11 @@ $(".list-group").on("blur" , "textarea" , function() {
     .closest(".list-group-item")
     .index();
 
+  // update task in array and re-save to localStorage
+  tasks[status][index].text = text;
+
   // recreate p element
-  var tastP = $("<p>")
+  var taskP = $("<p>")
     .addClass("m-1")
     .text(text);
 
@@ -103,7 +106,7 @@ $(".list-group").on("click" , "span" , function() {
   $(this).replaceWith(dateInput);
 
   // automatically focus on new element
-  dataInput.trigger("focus");
+  dateInput.trigger("focus");
 
 });
 
