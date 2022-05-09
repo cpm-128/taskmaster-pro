@@ -1,5 +1,5 @@
 # Project Intro
-A company called Taskmaster wants to add features to their task-management application. To do this, I'll need to work with their existing codebase, which was built using jQuery, a third-party JavaScript library that simplifies DOM manipulation, and the front-end CSS library Bootstrap.
+A company called Taskmaster wants to add features to their task-management application. To do this, work with the legacy codebase, which was built using jQuery, a third-party JavaScript library that simplifies DOM manipulation, and the front-end CSS library Bootstrap.
 
 ## Taskmaster App at Project Launch
 <img src="./assets/images/taskmaster-v0.jpeg">
