@@ -69,7 +69,10 @@ $("#trash").droppable({
 // delete trash drop end
 
 // date picker calendar start
-$("#modalDueDate").datepicker();
+$("#modalDueDate").datepicker({
+  // prevent entering past dates, 1 = how many days after the current day
+  minDate: 1
+});
 // date picker calendar end
 
 var tasks = {};
