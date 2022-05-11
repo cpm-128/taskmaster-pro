@@ -5,16 +5,16 @@ $(".card .list-group").sortable({       // sortable() makes all .list-group sort
   tolerance: "pointer",
   helper: "clone",
   activate: function(event) {
-    console.log("activate", this);
+    //console.log("activate", this);
   },
   deactivate: function(event) {
-    console.log("deactivate", this);
+    //console.log("deactivate", this);
   },
   over: function(event) {
-    console.log("over", event.target);
+    //console.log("over", event.target);
   },
   out: function(event) {
-    console.log("out", event.target);
+    //console.log("out", event.target);
   },
   update: function(event) {
     // array to store the task data in as it's updated
@@ -50,6 +50,23 @@ $(".card .list-group").sortable({       // sortable() makes all .list-group sort
   }
 });
 // sortable lists end
+
+// delete trash drop start
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolerance: "touch",
+  drop: function(event, ui) {
+    console.log(">>> drop >>>");
+    ui.draggable.remove(); // this is what actually removes what you are dragging
+  },
+  over: function(event, iu) {
+    console.log(">>> over >>>");
+  },
+  out: function(event, iu) {
+    console.log(">>> out >>>");
+  }
+});
+// delete trash drop end
 
 var tasks = {};
 
