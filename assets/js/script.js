@@ -1,6 +1,53 @@
 // sortable lists start
-$(".card .list-group").sortable({
-  connectWith: $(".card .list-group")
+$(".card .list-group").sortable({       // sortable() makes all .list-group sortable
+  connectWith: $(".card .list-group"),  // connect with means you can drag/drop across all .list-group elements bc they are connected
+  scroll: false,
+  tolerance: "pointer",
+  helper: "clone",
+  activate: function(event) {
+    console.log("activate", this);
+  },
+  deactivate: function(event) {
+    console.log("deactivate", this);
+  },
+  over: function(event) {
+    console.log("over", event.target);
+  },
+  out: function(event) {
+    console.log("out", event.target);
+  },
+  update: function(event) {
+    // array to store the task data in as it's updated
+    var tempArr = [];
+
+    // loop over current set of children <li> in sortable list
+    $(this).children().each(function() {
+      var text = $(this)
+        .find("p")
+        .text()
+        .trim();
+      var date = $(this)
+        .find("span")
+        .text()
+        .trim();
+
+    // add task date to the temp array as an object
+    tempArr.push({
+      text: text,
+      date: date
+    });
+    });
+    console.log(tempArr);
+
+    // trim down list's ID to match object property
+    var arrName = $(this)
+      .attr("id")
+      .replace("list-" , "");
+
+    // update array on tasks object and save
+    tasks[arrName] = tempArr;
+    saveTasks();
+  }
 });
 // sortable lists end
 
