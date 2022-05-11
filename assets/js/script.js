@@ -68,6 +68,10 @@ $("#trash").droppable({
 });
 // delete trash drop end
 
+// date picker calendar start
+$("#modalDueDate").datepicker();
+// date picker calendar end
+
 var tasks = {};
 
 var createTask = function(taskText, taskDate, taskList) {
