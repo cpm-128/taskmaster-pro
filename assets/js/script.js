@@ -68,12 +68,12 @@ $("#trash").droppable({
 });
 // delete trash drop end
 
-// date picker calendar start
+// date picker calendar start for new tasks
 $("#modalDueDate").datepicker({
   // prevent entering past dates, 1 = how many days after the current day
   minDate: 1
 });
-// date picker calendar end
+// date picker calendar end for new tasks
 
 var tasks = {};
 
@@ -165,7 +165,7 @@ $(".list-group").on("blur" , "textarea" , function() {
   $(this).replaceWith(taskP);
 });
 
-// change due date was clicked
+// change due date was clicked with calendar picker
 $(".list-group").on("click" , "span" , function() {
 
   // get current text
@@ -179,16 +179,25 @@ $(".list-group").on("click" , "span" , function() {
     .addClass("form-control")
     .val(date);
 
-  //swap out element\
+  //swap out element
   $(this).replaceWith(dateInput);
 
-  // automatically focus on new element
+  // enable jquery ui calendar datepicker
+  dateInput.datepicker({
+    minDate: 1,
+    onClose: function() {
+      // when the calendar is closed, force a 'change' evnet on the dateInput to avoid errors when deciding to not change date
+      $(this).trigger("change");
+    }
+  });
+
+  // automatically focus on new element and bring up calendar
   dateInput.trigger("focus");
 
 });
 
 // value of due date was changed
-$(".list-group").on("blur" , "input[type='text']" , function() {
+$(".list-group").on("change" , "input[type='text']" , function() {
   //get current text
   var date = $(this)
   .val()
