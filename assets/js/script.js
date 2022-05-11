@@ -1,3 +1,9 @@
+// sortable lists start
+$(".card .list-group").sortable({
+  connectWith: $(".card .list-group")
+});
+// sortable lists end
+
 var tasks = {};
 
 var createTask = function(taskText, taskDate, taskList) {
