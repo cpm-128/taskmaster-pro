@@ -97,6 +97,7 @@ var auditTask = function(taskEl) {
   } else if(Math.abs(moment().diff(time, "days")) <= 2) {
     $(taskEl).addClass("list-group-item-warning");
   }
+  // abs is to get the absolute value, no negatives. this avoids confusion with -2 days
 };
 // end audit tasks for color coding
 
@@ -253,7 +254,10 @@ $(".list-group").on("change" , "input[type='text']" , function() {
 
   // replace input with span element
   $(this).replaceWith(taskSpan);
-})
+
+  // pass task's <li> element into auditTask() to check new due date
+  auditTask($(taskSpan).closest(".list-group-item"));
+});
 
 
 
