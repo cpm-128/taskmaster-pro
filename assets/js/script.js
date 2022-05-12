@@ -5,16 +5,20 @@ $(".card .list-group").sortable({       // sortable() makes all .list-group sort
   tolerance: "pointer",
   helper: "clone",
   activate: function(event) {
-    $(this).addClass("dropover")
+    $(this).addClass("dropover");
+    $(".bottom-trash").addClass("bottom-trash-drag");
   },
   deactivate: function(event) {
-    $(this).removeClass("dropover")
+    $(this).removeClass("dropover");
+    $(".bottom-trash").removeClass("bottom-trash-drag");
   },
   over: function(event) {
-    $(event.target).addClass("dropover-active")
+    $(event.target).addClass("dropover-active");
+    $(".bottom-trash").addClass("bottom-trash-active");
   },
   out: function(event) {
-    $(event.target).removeClass("dropover-active")
+    $(event.target).removeClass("dropover-active");
+    $(".bottom-trash").removeClass("bottom-trash-active");
   },
   update: function(event) {
     // array to store the task data in as it's updated
