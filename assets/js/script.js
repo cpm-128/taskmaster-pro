@@ -71,10 +71,34 @@ $("#trash").droppable({
 // date picker calendar start for new tasks
 $("#modalDueDate").datepicker({
   // prevent entering past dates, 1 = how many days after the current day
-  minDate: 1
+  minDate: 0
 });
 // date picker calendar end for new tasks
 
+// start audit tasks for color coding
+var auditTask = function(taskEl) {
+
+  // DUE DATE: get date from task element
+  var date = $(taskEl).find("span").text().trim();
+    // check it worked
+    // console.log(">>> due date from span >>>" , date);
+
+  // PAST-DUE?: convert to moment object at 5:00pm today
+  var time = moment(date, "L").set("hour", 17); // L = locat time, hour 17 = 5pm, end of work day
+    // this should print out an object for the value of the date variable, but at 5pm of that date
+    // console.log(">>> CoB today >>>" , time);
+
+  // remove any old classes from element
+  $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
+
+  // apply new class if task is near/over due date, if right now is after var time
+  if(moment().isAfter(time)) {
+    $(taskEl).addClass("list-group-item-danger");
+  }
+};
+// end audit tasks for color coding
+
+// create tasks start
 var tasks = {};
 
 var createTask = function(taskText, taskDate, taskList) {
@@ -90,6 +114,8 @@ var createTask = function(taskText, taskDate, taskList) {
   // append span and p element to parent li
   taskLi.append(taskSpan, taskP);
 
+  // check due date
+  auditTask(taskLi);
 
   // append to ul list on the page
   $("#list-" + taskList).append(taskLi);
@@ -184,7 +210,7 @@ $(".list-group").on("click" , "span" , function() {
 
   // enable jquery ui calendar datepicker
   dateInput.datepicker({
-    minDate: 1,
+    minDate: 0,
     onClose: function() {
       // when the calendar is closed, force a 'change' evnet on the dateInput to avoid errors when deciding to not change date
       $(this).trigger("change");
