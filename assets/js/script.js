@@ -184,6 +184,7 @@ $(".list-group").on("blur" , "textarea" , function() {
 
   // update task in array and re-save to localStorage
   tasks[status][index].text = text;
+  saveTasks();
 
   // recreate p element
   var taskP = $("<p>")
@@ -240,7 +241,7 @@ $(".list-group").on("change" , "input[type='text']" , function() {
 
   // get the tasks' position in the list of other li elements
   var index = $(this)
-    .closest("list-group-item")
+    .closest(".list-group-item")
     .index();
 
   // update task in array and re-save to localStorage
