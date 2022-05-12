@@ -94,6 +94,8 @@ var auditTask = function(taskEl) {
   // apply new class if task is near/over due date, if right now is after var time
   if(moment().isAfter(time)) {
     $(taskEl).addClass("list-group-item-danger");
+  } else if(Math.abs(moment().diff(time, "days")) <= 2) {
+    $(taskEl).addClass("list-group-item-warning");
   }
 };
 // end audit tasks for color coding
